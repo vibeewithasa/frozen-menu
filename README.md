@@ -1,114 +1,53 @@
-# Helados Gourmet SPA ("frozen-menu")
+# Frozen Menu — Interactive Ice Cream Menu
 
-Single Page Application cinematográfica para una marca de helados gourmet. Construida con Vite + React + TypeScript, Three.js vía React Three Fiber, animaciones UI con Framer Motion y efectos de scroll 3D progresivos.
+A responsive, interactive digital menu developed for **Helados Gourmet Leal**. Visitors can browse a selection of ice cream flavors and view the corresponding product images.
 
-## Objetivo
+## Features
 
-Impacto visual alto (3D + microinteracciones) con foco en rendimiento, accesibilidad AA y narrativa scroll-driven que explica: qué vendemos, por qué es premium y cómo comprar/visitar.
+- Selectable flavor catalog
+- Product images shown on demand
+- Responsive grid for mobile and desktop
+- Pointer gesture handling to avoid accidental selections while scrolling
+- Keyboard-accessible flavor selection
+- Social contact links
+- Light and dark theme styling
 
-## Stack
+## Tech stack
 
-- Vite + React 18 + TypeScript (strict)
-- @react-three/fiber + @react-three/drei (Three.js abstractions)
-- Framer Motion (micro-animaciones / transiciones)
-- TailwindCSS (design tokens + velocity)
-- Zustand (estado ligero: sabor activo, tema, flags UI)
-- Netlify (deploy / redirects SPA / headers cache)
+**React · TypeScript · Vite · Tailwind CSS · Zustand · Framer Motion**
 
-## Estructura propuesta
+The repository also contains experimental 3D-related code and dependencies (React Three Fiber / Three.js); the current main page uses the interactive flavor catalog.
 
-```
-src/
-	assets/              # imágenes, modelos .glb/.gltf, texturas
-	components/          # UI reutilizable (Header, Footer, etc.)
-	features/
-		hero/
-		flavors/
-		process/
-		story/
-		locations/
-		contact/
-		three/             # Canvas3D, escenas, loaders, hooks
-	hooks/
-	styles/
-	utils/
-	App.tsx
-	main.tsx
+## Run locally
+
+Requires Node.js and npm.
+
+```bash
+npm install
+npm run dev
 ```
 
-## Secciones (roadmap inicial)
+Useful commands:
 
-1. Hero (cono/scoop 3D ligero + claim + CTA)
-2. Sabores Destacados (grid interactivo + spotlight 3D / cambio de acento)
-3. Showcase Scroll 3D (ScrollControls pages≈3: transición materiales, toppings, exploded view)
-4. Ingredientes & Proceso (texto + iconografía + motion)
-5. Historia (timeline breve)
-6. Ubicaciones / Cómo comprar
-7. Testimonios (opcional)
-8. CTA final (Sabor de la semana)
-9. Footer
-
-## Experiencia Scroll 3D
-
-ScrollControls (drei) divide narrativa en "capítulos":
-
-1. Scoop flotando rotando (vainilla → fresa → pistacho)
-2. Toppings cayendo (easing elástico controlado)
-3. Exploded view del cono (labels breves)
-
-Fallback en mobile / prefers-reduced-motion: frames estáticos o video ligero.
-
-## Accesibilidad
-
-- Focus visible, skip link, alt en imágenes
-- prefers-reduced-motion respetado
-- Contraste mínimo AA (paleta pastel + acentos contrastantes)
-
-## Rendimiento
-
-- LCP < 2.5s (modelo hero optimizado, lazy del canvas avanzado)
-- dpr={[1,1.5]} + Suspense + preload de modelos críticos
-- Modelos Draco / Meshopt (pendiente)
-- Limitar luces (1–2 direccionales + ambient suave)
-
-## Estado Global (Zustand)
-
-```ts
-interface FlavorState {
-  activeFlavor: string | null; // 'vainilla' | 'fresa' | ...
-  setActiveFlavor: (id: string) => void;
-}
+```bash
+npm run build
+npm run preview
+npm run lint
+npm run typecheck
 ```
 
-Extensiones futuras: theme, uiFlags, weeklyFlavor.
+## Project structure
 
-## Scripts
+- `src/components/` — page header, footer, and shared UI
+- `src/features/flavor-list/` — flavor catalog and interactions
+- `src/hooks/` — local UI state
+- `public/images/` — menu imagery and flavor assets
+- `netlify.toml` — deployment configuration
 
-```
-npm run dev       # desarrollo
-npm run build     # producción
-npm run preview   # vista previa local de build
-npm run lint      # eslint
-```
+## License and assets
 
-## Deploy Netlify
+The project contains an existing [MIT license](LICENSE) for the repository's software. Product photographs, names, logos, and other brand materials may be subject to separate ownership or usage rights; verify them before reuse.
 
-- `netlify.toml` con redirects SPA (`/* -> /index.html 200`)
-- Cache agresivo para assets fingerprinted, revalidación para index.html
+## Status
 
-## Roadmap Próximo
-
-- [ ] Añadir sección Ingredientes & Proceso
-- [ ] Preload modelos (useGLTF + suspend)
-- [ ] Fallback motion-reduced
-- [ ] Botón tema claro/oscuro
-- [ ] Lighthouse tuning (imágenes WebP/AVIF)
-- [ ] Sitemap + robots
-
-## Licencia
-
-MIT
-
----
-
-WIP: Este README evolucionará conforme se implementen capítulos 3D adicionales y optimizaciones de performance.
+A functional interactive flavor menu. Additional visual experiments and refinements may be developed separately.
