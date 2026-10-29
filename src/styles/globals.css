@@ -4,21 +4,42 @@
 
 :root {
   --ease-soft: cubic-bezier(0.16, 0.84, 0.44, 1);
+
+  /* Tema de sabor por defecto (se sobrescribe en runtime por sabor activo) */
+  --flavor: #ff6b6b;
+  --flavor-tint: #ffe0e0;
+  --flavor-ink: #2a1d18;
 }
 
 html,
 body,
 #root {
-  height: 100%;
-  background: theme("colors.vanilla"); /* fondo vainilla uniforme */
-  /* Fallback por si el token no se resuelve (muy raro en build): */
-  background-color: #f5e6c8;
+  min-height: 100%;
+}
+
+body {
+  background-color: #fbf7ef; /* cream */
+  color: #2a1d18; /* ink */
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #ff6b6b;
+  color: #fff;
+}
+
+/* Enfoque visible y consistente en toda la app */
+:focus-visible {
+  outline: 2px solid var(--flavor, #ff6b6b);
+  outline-offset: 2px;
 }
 
 /* Preferencias de reducción de movimiento */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -26,6 +47,13 @@ body,
   }
 }
 
-.fade-in-up {
-  @apply opacity-0 translate-y-4;
+@layer components {
+  /* Contenedor con textura de "grano" sutil opcional para superficies premium */
+  .surface-grain {
+    background-image: radial-gradient(
+      rgba(42, 29, 24, 0.025) 1px,
+      transparent 1px
+    );
+    background-size: 4px 4px;
+  }
 }

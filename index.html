@@ -2,70 +2,92 @@
 <html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/public/images/logo-helados.png"
-    />
-    <!-- Nota: Deshabilitar zoom puede afectar accesibilidad (usuarios con baja visión). -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-cover.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/images/logo-helados.png" />
+    <link rel="apple-touch-icon" href="/images/logo-helados.png" />
+    <meta name="theme-color" content="#FBF7EF" />
+
+    <!-- CSS crítico: evita FOUC (fondo crema desde el primer frame y skip-link
+         oculto fuera de pantalla antes de que cargue el bundle de Tailwind). -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        background-color: #fbf7ef;
+        color: #2a1d18;
+      }
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        z-index: 100;
+      }
+      .skip-link:focus {
+        left: 0.5rem;
+        top: 0.5rem;
+        width: auto;
+        height: auto;
+        padding: 0.25rem 0.75rem;
+        background: #ffffff;
+        color: #2a1d18;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 24px -4px rgba(42, 29, 24, 0.18);
+      }
+    </style>
+
     <title>Helados Gourmet Leal</title>
+    <meta
+      name="description"
+      content="Helados Gourmet Leal — heladería gourmet con una gran variedad de sabores para disfrutar. Descubre nuestros sabores y visítanos."
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Helados Gourmet Leal" />
+    <meta
+      property="og:description"
+      content="Heladería gourmet con una gran variedad de sabores para disfrutar."
+    />
+    <meta property="og:image" content="/images/logo-helados.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Helados Gourmet Leal" />
+    <meta
+      name="twitter:description"
+      content="Heladería gourmet con una gran variedad de sabores para disfrutar."
+    />
+    <meta name="twitter:image" content="/images/logo-helados.png" />
+
+    <!-- Datos estructurados: solo información real confirmada (marca + redes).
+         Dirección, horarios y precios se añadirán cuando estén confirmados. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "IceCreamShop",
+        "name": "Helados Gourmet Leal",
+        "image": "/images/logo-helados.png",
+        "sameAs": [
+          "https://www.instagram.com/helados_gourmet_",
+          "https://www.facebook.com/Helados.Gourmet.23"
+        ]
+      }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body
-    class="font-sans bg-vanilla text-neutral-800 dark:bg-neutral-900 dark:text-neutral-100"
-  >
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white text-black px-3 py-1 rounded"
-      >Saltar al contenido</a
-    >
+  <body class="font-sans bg-cream text-ink antialiased">
+    <a href="#main" class="skip-link">Saltar al contenido</a>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      // Prevención de doble tap zoom en iOS / móviles
-      let lastTouchEnd = 0;
-      document.addEventListener(
-        "touchend",
-        function (event) {
-          const now = Date.now();
-          // Si dos touchend muy seguidos, prevenir el zoom
-          if (now - lastTouchEnd <= 320) {
-            event.preventDefault();
-          }
-          lastTouchEnd = now;
-        },
-        { passive: false }
-      );
-
-      // Prevenir pinch zoom (gestos) en navegadores WebKit
-      document.addEventListener(
-        "gesturestart",
-        function (e) {
-          e.preventDefault();
-        },
-        { passive: false }
-      );
-
-      // Prevenir zoom con Ctrl + wheel (desktop / algunos móviles con trackpad)
-      document.addEventListener(
-        "wheel",
-        function (e) {
-          if (e.ctrlKey) {
-            e.preventDefault();
-          }
-        },
-        { passive: false }
-      );
-    </script>
   </body>
 </html>

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "SPA cinematográfica de helados gourmet con React, Three.js (R3F) y efectos scroll.",
+  "description": "Single-page premium de Helados Gourmet Leal con React, Tailwind y Framer Motion.",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
@@ -13,8 +13,7 @@
   },
   "keywords": [
     "ice-cream",
-    "threejs",
-    "react-three-fiber",
+    "helados",
     "framer-motion",
     "vite",
     "tailwindcss",
@@ -23,13 +22,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@react-three/drei": "^9.100.3",
-    "@react-three/fiber": "^8.17.10",
     "clsx": "^2.1.1",
     "framer-motion": "^11.0.23",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "three": "^0.160.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
