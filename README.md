@@ -38,11 +38,23 @@ npm run typecheck
 
 ## Project structure
 
-- `src/components/` — page header, footer, and shared UI
-- `src/features/flavor-list/` — flavor catalog and interactions
-- `src/hooks/` — local UI state
+- `src/components/` — layout and shared UI components
+- `src/sections/` — page sections, including flavor browsing
+- `src/data/flavors.ts` — flavor and category catalog
+- `src/config/site.ts` — business contact, content, and SEO settings
+- `src/hooks/` — local UI state and motion preferences
 - `public/images/` — menu imagery and flavor assets
 - `netlify.toml` — deployment configuration
+
+## Project documentation
+
+- [Local development](docs/development.md)
+- [Architecture](docs/architecture.md)
+- [Updating menu content](docs/content-guide.md)
+- [Deployment notes](docs/deployment.md)
+- [Manual QA checklist](docs/manual-qa.md)
+- [Accessibility review](docs/accessibility.md)
+- [Troubleshooting](docs/troubleshooting.md)
 
 ## License and assets
 
