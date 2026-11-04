@@ -23,6 +23,12 @@ This is a manual review guide, not a claim of WCAG certification.
 
 Test with `prefers-reduced-motion: reduce` enabled in browser or operating-system settings. Verify that essential content remains available without depending on animation.
 
+## Known mobile preview scroll gap
+
+In `src/sections/FlavorExplorer.tsx`, selecting a flavor below 1024 px schedules `scrollIntoView({ behavior: "smooth", block: "center" })` even when the reduced-motion hook returns `true`. This is an observed **source-code gap**, not a claim that browser behavior was tested.
+
+To reproduce, enable reduced motion in the browser/OS, use a viewport narrower than 1024 px, select a flavor, and inspect how the preview moves into view. Desired behavior: honor the motion preference (or avoid animated scrolling) while keeping the selected preview visible. A future code fix should have a dedicated browser check; the current document does not imply that the gap is fixed.
+
 ## Visual legibility
 
 Review text/background contrast, zoom to 200%, narrow viewport reflow and focus visibility. Test light and dark appearances where applicable.
