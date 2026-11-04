@@ -31,3 +31,15 @@ Use this checklist before releasing catalog or layout changes. Record the browse
 ## Before release
 
 Run `npm run typecheck`, `npm run lint` and `npm run build`. Browser checks are still required because these commands cannot validate visual behavior.
+
+## Catalog flag regression scenarios
+
+When changing availability or featured flags in `src/data/flavors.ts`, test each behavior separately:
+
+- [ ] Set one flavor's `available` to `false` temporarily: it remains in explorer results, appears dimmed, and its preview shows `Agotado`.
+- [ ] Set one category's `available` to `false` temporarily: its tab disappears; restore the value after checking.
+- [ ] Mark one flavor `featured: true` temporarily: it appears in the featured section and the navigation entry becomes available; remove the flag afterward if it was only a test.
+- [ ] With no featured flavors, confirm the featured section and navigation entry are absent.
+- [ ] Change `season` on a test flavor: confirm this metadata alone does not schedule automatic visibility changes.
+
+Restore all temporary catalog edits before committing or publishing. These are manual scenarios, not assertions that a browser test has already passed.
