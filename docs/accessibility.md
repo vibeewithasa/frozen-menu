@@ -10,6 +10,20 @@ This is a manual review guide, not a claim of WCAG certification.
 4. Activate flavor selections with Enter or Space as appropriate.
 5. Confirm focus remains usable after filtering or changing the preview.
 
+## Skip link and mobile navigation checks
+
+The `index.html` skip link targets `#main` in `src/App.tsx`, and `Nav.tsx` controls its mobile navigation with a button that exposes `aria-expanded` and `aria-controls="mobile-menu"`. The menu code also handles Escape by closing the menu and returning focus to its toggle.
+
+Review these source-backed behaviors manually:
+
+1. Reload at the top of the page, press Tab, and verify `Saltar al contenido` becomes visible and leads to the main content.
+2. At a mobile viewport, open the navigation using the keyboard; verify the toggle's accessible name and expanded state.
+3. Press Escape with the menu open; verify the panel closes and focus returns to the toggle.
+4. Open it again, follow a navigation anchor, and check that the panel closes without obscuring the destination.
+5. Verify that links hidden from navigation due to missing business data are not offered as dead anchors.
+
+These are regression steps, not evidence of a completed keyboard or screen-reader audit.
+
 ## Screen reader basics
 
 - Check meaningful names for the search input and flavor controls.
