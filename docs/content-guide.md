@@ -24,6 +24,12 @@ These flags control different behavior in the current UI:
 
 After changing these flags, check both the explorer and navigation links, not just the main flavor grid. If a product must disappear completely, plan and review that behavior separately rather than assuming `available: false` hides it.
 
+### Where sold-out flavors still appear
+
+The current `FlavorMarquee.tsx` renders the full `flavors` array, including entries with `available: false`, in a decorative ribbon. The `Hero.tsx` flavor count also uses `flavors.length`, not a count of available items. The `Featured.tsx` section uses `featuredFlavors` and does not filter by `available`, so a flavor that is both featured and sold out may still have a featured card.
+
+This matters when publishing availability changes: review explorer results, marquee, featured cards and hero count together. Do not interpret the homepage count as the number currently in stock; hiding unavailable products in these secondary surfaces would require a separate, tested code change.
+
 ## Edit categories
 
 Categories are defined in the `categories` array with stable IDs, display names, ordering and an `available` flag. If you rename an ID, update references in flavors and the relevant asset folder.
