@@ -8,6 +8,12 @@ The repository includes `netlify.toml` with a Vite build configuration:
 
 The configuration also defines cache headers, including a separate rule for `/index.html`. Review those rules when changing asset naming or hosting behavior.
 
+## Cache verification for updated images
+
+The current `netlify.toml` applies `Cache-Control: public, max-age=31536000, immutable` to `/*`, alongside a more specific `/index.html` revalidation rule. Because flavor artwork uses stable public paths such as `/images/flavors/<categoryId>/<id>.jpg`, replacing an image **without changing its URL** can leave visitors seeing the old copy if it was cached with the immutable policy.
+
+Before promoting a release that replaces an existing image, inspect the actual deployed response headers for that image and `/index.html` (do not assume which overlapping Netlify rule wins). Test with a warm browser cache as well as a private window. If the old asset remains cached, review an intentional filename/versioning or cache-policy change separately with deployment tests; this document does not change hosting configuration.
+
 ## Before publishing
 
 ```bash
