@@ -7,16 +7,15 @@ A responsive, interactive digital menu developed for **Helados Gourmet Leal**. V
 - Selectable flavor catalog
 - Product images shown on demand
 - Responsive grid for mobile and desktop
-- Pointer gesture handling to avoid accidental selections while scrolling
-- Keyboard-accessible flavor selection
-- Social contact links
-- Light and dark theme styling
+- Flavor selection through ordinary buttons, with keyboard support
+- Social and WhatsApp contact links based on verified business settings
+- Light, cream-toned visual styling and flavor-responsive accent colors
 
 ## Tech stack
 
 **React · TypeScript · Vite · Tailwind CSS · Zustand · Framer Motion**
 
-The repository also contains experimental 3D-related code and dependencies (React Three Fiber / Three.js); the current main page uses the interactive flavor catalog.
+The current `package.json` does not include React Three Fiber or Three.js. The active page is a standard React catalog, with Framer Motion animations and Zustand state.
 
 ## Run locally
 
