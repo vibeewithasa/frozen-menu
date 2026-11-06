@@ -30,6 +30,11 @@ Check letter case, file extension, category ID and the resulting URL in browser 
 
 Check `src/config/site.ts`. Empty arrays and null business details deliberately suppress some sections and navigation links. Do not fill them with fabricated placeholders.
 
+
+## A sold-out flavor is still visible
+
+Check the flavor's `available` flag in `src/data/flavors.ts`. Setting it to `false` dims its explorer entry and displays `Agotado` in the preview; it does not remove the flavor from all sections. The decorative marquee, hero count and featured cards can still include sold-out flavors. See [the content guide](content-guide.md#where-sold-out-flavors-still-appear) before changing catalog visibility. Do not remove products from data merely to work around a display expectation without confirming the desired business behavior.
+
 ## The deployed page differs from local
 
 Run `npm run build` and `npm run preview`. Compare the deployed commit, hosting build logs, network requests and caching behavior. The Netlify configuration lives in `netlify.toml`.
