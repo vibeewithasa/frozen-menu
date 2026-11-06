@@ -38,6 +38,13 @@ Categories are defined in the `categories` array with stable IDs, display names,
 
 Edit `src/config/site.ts` for brand details, social links, business hours, gallery, reviews and SEO content. Values intentionally left null or empty suppress unsupported sections. Confirm real business information with its owner before publishing.
 
+
+## Pre-publication data integrity checks
+
+Before adding a batch of flavors, compare every new `id` against the existing `rawFlavors` entries. IDs are used for lookup and default image paths, so duplicate IDs can cause the wrong item to be selected. Confirm each `categoryId` exists in `categories`, and avoid renaming existing IDs unless the corresponding images and references are updated together.
+
+For each new flavor, open its resolved image URL in a browser (the convention uses a `.jpg` extension). A working fallback does not establish that the intended photograph was uploaded. Check the menu with both the new category selected and `Todos` selected, then search for the flavor by its visible name. These checks are manual; this repository does not currently declare an automated test script.
+
 ## Review checklist
 
 - Names, spelling and category assignments are correct.
