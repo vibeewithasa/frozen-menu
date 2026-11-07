@@ -28,6 +28,16 @@ Use this checklist before releasing catalog or layout changes. Record the browse
 - [ ] Sections without verified business data stay hidden.
 - [ ] Page title and metadata reflect the current brand.
 
+## When publishing optional gallery or review sections
+
+`src/config/site.ts` currently leaves `gallery` and `reviews` empty. If approved business content is added, review these safeguards separately:
+
+- [ ] Gallery images come from authorized sources, use distinct `src` values (the React list uses `img.src` as its key), have specific `alt` text, and load at multiple viewport widths.
+- [ ] A missing gallery image does not have the explorer's error fallback; test the actual image URLs rather than relying on the empty gallery state.
+- [ ] Every review is genuine and approved for display; `author`, `text` and optional `source` identify it accurately.
+- [ ] Optional numeric `rating` values are finite and between **1 and 5**. `Reviews.tsx` repeats star characters after rounding without runtime bounds checking; a negative or extreme value can cause a rendering error. Omit a rating when none was provided.
+- [ ] Verify the `Galería` and `Opiniones` navigation links only appear when their sections contain real content.
+
 ## Before release
 
 Run `npm run typecheck`, `npm run lint` and `npm run build`. Browser checks are still required because these commands cannot validate visual behavior.
