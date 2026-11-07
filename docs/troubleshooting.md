@@ -35,6 +35,12 @@ Check `src/config/site.ts`. Empty arrays and null business details deliberately 
 
 Check the flavor's `available` flag in `src/data/flavors.ts`. Setting it to `false` dims its explorer entry and displays `Agotado` in the preview; it does not remove the flavor from all sections. The decorative marquee, hero count and featured cards can still include sold-out flavors. See [the content guide](content-guide.md#where-sold-out-flavors-still-appear) before changing catalog visibility. Do not remove products from data merely to work around a display expectation without confirming the desired business behavior.
 
+## Search finds fewer flavors than expected
+
+`src/sections/FlavorExplorer.tsx` searches **`f.name` only**, case-insensitively and with diacritics removed. It does not search `description`, `season`, `id` or category labels. A category filter and a text query apply **together**, so a matching flavor in another selected category is excluded.
+
+If a flavor cannot be found, switch the category to `Todos`, clear the search field, then search by its display name (for example, try `mazapan` for `Mazapán`). The list initially shows 24 results; when applicable, `Cargar más` reveals the remaining matches. Use this sequence to distinguish intended filtering from missing catalog data before changing the source.
+
 ## The deployed page differs from local
 
 Run `npm run build` and `npm run preview`. Compare the deployed commit, hosting build logs, network requests and caching behavior. The Netlify configuration lives in `netlify.toml`.
