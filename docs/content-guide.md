@@ -11,7 +11,7 @@ The catalog data is maintained in `src/data/flavors.ts`.
 5. Place the corresponding image at `public/images/flavors/<categoryId>/<id>.jpg`, or set an explicit `image` path.
 6. Check category filtering, search results and the larger image preview.
 
-Missing image files use a visual fallback; still inspect the page to verify assets before deployment. An omitted `available` field defaults to true.
+The **explorer preview** shows a visual fallback when an image fails to load; still verify assets before deployment. The **featured section does not have the same network-error fallback**: `Featured.tsx` renders an `<img>` when its `image` path is nonempty, and `resolveImage()` supplies a nonempty default path for every catalog flavor. A missing featured image may therefore render broken even when the explorer preview looks acceptable. Check a newly featured flavor's image in **both** places. An omitted `available` field defaults to true.
 
 ## Availability, featured items, and seasonal notes
 
