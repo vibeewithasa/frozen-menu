@@ -45,6 +45,12 @@ Before adding a batch of flavors, compare every new `id` against the existing `r
 
 For each new flavor, open its resolved image URL in a browser (the convention uses a `.jpg` extension). A working fallback does not establish that the intended photograph was uploaded. Check the menu with both the new category selected and `Todos` selected, then search for the flavor by its visible name. These checks are manual; this repository does not currently declare an automated test script.
 
+## Validate social handles and order links
+
+`src/config/site.ts` stores **handles, not complete social URLs**. The `instagramUrl()` and `facebookUrl()` helpers prepend the relevant hostname; pasting `https://...` into `site.instagram` or `site.facebook` would construct a malformed destination. Set only the exact approved profile handle or page path. `site.whatsapp` must contain the full international number **as digits only**, without `+`, spaces or dashes: `whatsappUrl()` inserts it into `https://wa.me/` and URL-encodes any optional prefilled text.
+
+After changing these fields, click the actual links on desktop and mobile, verify the destination profile/number with the business owner, and check that `Pedir por WhatsApp` contains the intended prefilled message. A working social domain is not proof that it is the correct account.
+
 ## Review checklist
 
 - Names, spelling and category assignments are correct.
