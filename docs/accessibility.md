@@ -43,6 +43,12 @@ In `src/sections/FlavorExplorer.tsx`, selecting a flavor below 1024 px schedules
 
 To reproduce, enable reduced motion in the browser/OS, use a viewport narrower than 1024 px, select a flavor, and inspect how the preview moves into view. Desired behavior: honor the motion preference (or avoid animated scrolling) while keeping the selected preview visible. A future code fix should have a dedicated browser check; the current document does not imply that the gap is fixed.
 
+## Touch scrolling and accidental flavor selection
+
+The flavor tiles in `FlavorExplorer.tsx` use native `<button onClick={...}>` handlers; there is **no custom touch-gesture discrimination** in the current component. Browsers normally suppress clicks after a true scroll gesture, but the project itself does not guarantee that a near-tap while moving a finger cannot select a flavor. The mobile selection also requests smooth scrolling to the preview (see the reduced-motion gap above).
+
+On a physical touch device, drag through the grid with slow and quick gestures, stop a drag near a button, and check whether selection and automatic scrolling occur unexpectedly. Repeat a deliberate tap to make sure selection still works. Record device/browser and touch behavior; a desktop mouse test alone cannot establish this interaction is safe. This is a manual test recommendation, not a verified defect.
+
 ## Visual legibility
 
 Review text/background contrast, zoom to 200%, narrow viewport reflow and focus visibility. Test light and dark appearances where applicable.
