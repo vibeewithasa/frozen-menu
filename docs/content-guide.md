@@ -17,7 +17,7 @@ The **explorer preview** shows a visual fallback when an image fails to load; st
 
 These flags control different behavior in the current UI:
 
-- A **category** with `available: false` is omitted from the category tabs. `getVisibleCategories()` also omits categories that have no flavors at all.
+- A **category** with `available: false` is omitted from the category tabs. `getVisibleCategories()` also omits categories that have no flavors at all. **However, this flag does not hide the category's products from `Todos` or name search**: the explorer filters the `flavors` list without checking the parent category's `available` flag. Do not use the category setting as a publication embargo.
 - A **flavor** with `available: false` stays in the explorer results and can still be previewed: its selection is dimmed and the preview shows an `Agotado` badge. This is **not** a mechanism for hiding a flavor from the catalog.
 - `featured: true` adds a flavor to the separate featured section. If no flavors are marked, that section and its navigation link are omitted.
 - `isNew: true` displays a new-item badge; `season` is currently descriptive data and does not automatically schedule visibility.
