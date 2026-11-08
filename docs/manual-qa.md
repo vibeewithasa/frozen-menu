@@ -28,6 +28,16 @@ Use this checklist before releasing catalog or layout changes. Record the browse
 - [ ] Sections without verified business data stay hidden.
 - [ ] Page title and metadata reflect the current brand.
 
+## Active preview after changing a filter
+
+The selected flavor ID is stored independently of the category and search fields in `useFlavorStore`. The explorer currently changes category/query results without clearing that selection, so the large preview may continue displaying a flavor **not in the filtered grid**. This is a source-backed interaction gap requiring product review, not an observed browser-test result.
+
+- [ ] Select a flavor from `Base de leche`, then switch to `Base de agua`; inspect whether the preview still shows the first flavor.
+- [ ] Select a result, then search for a different name or a query with zero matches; check whether the preview stays visible and whether that behavior is understandable.
+- [ ] Clear the selection using `Cerrar vista del sabor` and confirm the empty-preview prompt returns.
+
+Do not treat a stale selected preview as evidence that filtering returned the wrong items; review these two states separately before changing the implementation.
+
 ## When publishing optional gallery or review sections
 
 `src/config/site.ts` currently leaves `gallery` and `reviews` empty. If approved business content is added, review these safeguards separately:
