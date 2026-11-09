@@ -8,7 +8,8 @@ interface ChipProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 /**
  * Pill seleccionable genérica (tabs de categoría, filtros).
- * Cuando está activa usa el color de tema reactivo (var(--flavor)).
+ * Su estado activo usa `bg-ink text-cream`, no la variable `--flavor`.
+ * Mantener esta descripción alineada con las clases Tailwind reales.
  */
 export function Chip({ active = false, children, className, ...rest }: ChipProps) {
   return (
