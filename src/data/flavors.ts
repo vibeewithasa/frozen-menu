@@ -4,7 +4,9 @@
  * componentes ni layouts. La grilla, tabs, buscador y preview se adaptan solos.
  *
  * Imagen: por convención se resuelve a /images/flavors/<categoryId>/<id>.jpg.
- * Si el archivo no existe, la UI muestra un fallback visual elegante (no un error).
+ * Si falta la imagen, el PREVIEW del explorador muestra un fallback al fallar la carga.
+ * La tarjeta de Destacados no tiene fallback para una URL rota: verifica las
+ * fotos antes de marcar un sabor como featured (ver docs/content-guide.md).
  * Puedes sobrescribir la ruta con el campo `image`.
  */
 
