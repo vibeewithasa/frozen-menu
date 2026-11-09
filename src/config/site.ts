@@ -1,6 +1,8 @@
 /**
- * Fuente ÚNICA de datos del negocio.
- * Actualizar información comercial = editar este archivo, sin tocar componentes.
+ * Fuente principal de datos comerciales consumidos por los componentes React.
+ * El título, metadatos sociales y datos estructurados publicados en `index.html`
+ * son estáticos: verificar ambos archivos al cambiar marca, redes o dominio.
+ * Véase `docs/architecture.md` antes de publicar un cambio de identidad.
  *
  * IMPORTANTE: los campos en `null` o vacíos representan información que aún no
  * existe. Sus secciones se OCULTAN automáticamente (no se muestran placeholders
