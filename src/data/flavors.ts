@@ -28,7 +28,7 @@ export interface FlavorCategory {
   name: string;
   /** orden de aparición de las tabs */
   order: number;
-  /** si es false, la categoría (y su tab) no se muestra */
+  /** si es false, oculta la pestaña de categoría, NO sus sabores en Todos/búsqueda */
   available: boolean;
 }
 
