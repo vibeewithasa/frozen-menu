@@ -41,6 +41,12 @@ Edit `src/config/site.ts` for brand details, social links, business hours, galle
 When entering `site.hours`, use a distinct, understandable `days` label for each row: both `Visit.tsx` and `Footer.tsx` use `h.days` as the React list key, so duplicate day labels can cause unstable rendering or warnings. Confirm ranges and hours with the business, including closures and holidays, rather than inventing schedule information. Test the Visit section and footer together; either can appear when hours are the only available visit data.
 
 
+## Replacing the hero artwork
+
+`src/sections/Hero.tsx` uses a decorative logo composition when `site.hero.image` is `null`. Supplying a nonempty URL switches to a real `<img>` and uses `site.hero.imageAlt` (or `""` when absent). Unlike the flavor explorer, the hero does **not** have a network-error fallback: a broken custom URL does not automatically restore the decorative composition.
+
+For an approved hero photograph, verify its rights and public URL, inspect cropping at phone and desktop widths, and supply a concise, accurate `hero.imageAlt` when the photograph conveys content. Only use an empty alt when the image is genuinely decorative and the adjacent text already conveys the information. If the image cannot be verified, keep `site.hero.image: null` rather than publishing a broken URL. This is a content review instruction, not a claim that these browser checks have run.
+
 ## Pre-publication data integrity checks
 
 Before adding a batch of flavors, compare every new `id` against the existing `rawFlavors` entries. IDs are used for lookup and default image paths, so duplicate IDs can cause the wrong item to be selected. Confirm each `categoryId` exists in `categories`, and avoid renaming existing IDs unless the corresponding images and references are updated together.
