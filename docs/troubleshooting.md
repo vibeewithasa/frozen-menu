@@ -41,6 +41,12 @@ Check the flavor's `available` flag in `src/data/flavors.ts`. Setting it to `fal
 
 If a flavor cannot be found, switch the category to `Todos`, clear the search field, then search by its display name (for example, try `mazapan` for `Mazapán`). The list initially shows 24 results; when applicable, `Cargar más` reveals the remaining matches. Use this sequence to distinguish intended filtering from missing catalog data before changing the source.
 
+## Filters or selected flavor disappear after a reload
+
+`src/hooks/useFlavorStore.ts` uses a plain in-memory Zustand store (`activeFlavor`, `category`, `query`) with no `persist` middleware, URL query parameters or storage integration. The current selection and search are therefore **session UI state**, not saved preferences. A full browser reload starts again with all categories, an empty query and no selected preview. Do not diagnose this expected reset as lost catalog data; the actual list of flavors still comes from `src/data/flavors.ts`.
+
+If product requirements call for bookmarked searches or restored sessions, agree on URL/storage behavior and privacy implications first, then implement and test it as a separate feature.
+
 ## The deployed page differs from local
 
 Run `npm run build` and `npm run preview`. Compare the deployed commit, hosting build logs, network requests and caching behavior. The Netlify configuration lives in `netlify.toml`.
