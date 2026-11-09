@@ -38,6 +38,8 @@ Categories are defined in the `categories` array with stable IDs, display names,
 
 Edit `src/config/site.ts` for brand details, social links, business hours, gallery, reviews and SEO content. Values intentionally left null or empty suppress unsupported sections. Confirm real business information with its owner before publishing.
 
+When entering `site.hours`, use a distinct, understandable `days` label for each row: both `Visit.tsx` and `Footer.tsx` use `h.days` as the React list key, so duplicate day labels can cause unstable rendering or warnings. Confirm ranges and hours with the business, including closures and holidays, rather than inventing schedule information. Test the Visit section and footer together; either can appear when hours are the only available visit data.
+
 
 ## Pre-publication data integrity checks
 
