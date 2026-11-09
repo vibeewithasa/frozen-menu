@@ -51,6 +51,6 @@ On a physical touch device, drag through the grid with slow and quick gestures, 
 
 ## Visual legibility
 
-Review text/background contrast, zoom to 200%, narrow viewport reflow and focus visibility. Test light and dark appearances where applicable.
+Review text/background contrast, zoom to 200%, narrow viewport reflow and focus visibility in the current **light, cream-colored appearance**. The application does not presently implement a separate dark theme; do not report dark-mode accessibility tests as passing unless such a theme is added and actually exercised.
 
 When fixing an issue, record the browser, assistive technology (if used), reproduction steps and expected behavior.
