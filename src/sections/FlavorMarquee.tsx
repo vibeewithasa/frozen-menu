@@ -2,8 +2,9 @@ import { flavors } from "../data/flavors";
 import { flavorColors } from "../lib/flavorTheme";
 
 /**
- * Cinta animada (CSS) con los sabores. Puramente decorativa: enlaza al
- * explorador. Se duplica la lista para un bucle continuo sin salto.
+ * Cinta animada (CSS) con los sabores, sin enlaces ni controles.
+ * Es decorativa (`aria-hidden`); la selección ocurre en `FlavorExplorer`.
+ * Se duplica la lista para un bucle continuo sin salto.
  */
 export function FlavorMarquee() {
   if (flavors.length === 0) return null;
