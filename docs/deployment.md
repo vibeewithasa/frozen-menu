@@ -14,6 +14,10 @@ The current `netlify.toml` applies `Cache-Control: public, max-age=31536000, imm
 
 Before promoting a release that replaces an existing image, inspect the actual deployed response headers for that image and `/index.html` (do not assume which overlapping Netlify rule wins). Test with a warm browser cache as well as a private window. If the old asset remains cached, review an intentional filename/versioning or cache-policy change separately with deployment tests; this document does not change hosting configuration.
 
+## Social-preview image URLs
+
+`index.html` currently declares an Open Graph image using the root-relative path `/images/logo-helados.png` and repeats that path in structured data and Twitter metadata. Some social crawlers expect an **absolute public HTTPS URL** for share images; a local build passing does not prove that an external preview service can resolve a relative URL. After connecting the final domain, verify the deployed document and test its share preview with the relevant crawler/debugger, including image dimensions and public access. Do not invent a production domain or silently change social metadata without confirming the actual deployment URL.
+
 ## Before publishing
 
 ```bash
