@@ -10,6 +10,15 @@ This is a manual review guide, not a claim of WCAG certification.
 4. Activate flavor selections with Enter or Space as appropriate.
 5. Confirm focus remains usable after filtering or changing the preview.
 
+## Focus visibility on catalog controls
+
+The app-wide CSS in `src/styles/globals.css` defines a `:focus-visible` outline, but `FlavorExplorer.tsx` adds Tailwind `focus-visible:outline-none` to the search field, flavor buttons and preview-close control. These local classes may override the shared focus indication. The search field changes its border on focus; the catalog buttons do not define a comparable explicit focus ring in their own class lists.
+
+- [ ] Starting with a mouse-free reload, use Tab and Shift+Tab to focus **Todos**, each category chip, **Buscar sabor**, a flavor result, and **Cerrar vista del sabor** after selecting one.
+- [ ] Verify that **every** focused control has a high-contrast, unambiguous visible indicator against its selected, dimmed, and normal backgrounds.
+- [ ] Repeat with browser zoom and the high-contrast/forced-colors mode where supported. Do not rely on a mouse hover state as the keyboard focus style.
+- [ ] If the outline is absent, fix the component styles and rerun the browser checks in a separately reviewed change; the current source inspection alone does not establish the rendered result.
+
 ## Skip link and mobile navigation checks
 
 The `index.html` skip link targets `#main` in `src/App.tsx`, and `Nav.tsx` controls its mobile navigation with a button that exposes `aria-expanded` and `aria-controls="mobile-menu"`. The menu code also handles Escape by closing the menu and returning focus to its toggle.
