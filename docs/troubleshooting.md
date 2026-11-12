@@ -26,6 +26,12 @@ For a flavor without an explicit `image` property, the expected file is:
 
 Check letter case, file extension, category ID and the resulting URL in browser developer tools. The fallback UI is not proof that the original image exists.
 
+## Corrected flavor image still shows the fallback
+
+`FlavorExplorer.tsx` records preview image failures in the **component-local `imgError` map keyed by flavor ID**. Once a particular image emits `onError`, switching categories or reselecting the same flavor does not clear its error flag. That fallback is not proof that the server is still serving the missing file: after fixing an asset URL or deployment, **reload the page**, then inspect the resolved image response in developer tools. Verify the exact catalog image path, response status and any caching headers before changing flavor data.
+
+This applies to the **large explorer preview**. Featured cards and the hero have separate rendering paths and do not inherit that error map; test those images individually. A cache or network failure may still persist after reload, so do not claim a reload fixes the underlying asset.
+
 ## Content section does not appear
 
 Check `src/config/site.ts`. Empty arrays and null business details deliberately suppress some sections and navigation links. Do not fill them with fabricated placeholders.
