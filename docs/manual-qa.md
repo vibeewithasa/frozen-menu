@@ -28,6 +28,17 @@ Use this checklist before releasing catalog or layout changes. Record the browse
 - [ ] Sections without verified business data stay hidden.
 - [ ] Page title and metadata reflect the current brand.
 
+## Search updates and pagination after rapid typing
+
+`FlavorExplorer.tsx` keeps the input's immediate `query` state, filters on `useDeferredValue(query)`, and resets visible results to **24** in an effect when the deferred query or selected category changes. This is intended to keep typing responsive, but a normal single-keypress check does not exercise intermediate results, a previously expanded list or quick filter changes.
+
+- [ ] With more than 24 matching flavors, select **Cargar más** and confirm the additional items appear.
+- [ ] Type several characters rapidly, then clear the search before results settle. After the UI stabilizes, ensure the displayed list matches the **current input**, not an older query.
+- [ ] With an expanded list, switch categories or change the search. Confirm the pagination returns to the first 24 matches and that **Cargar más** reports the appropriate remaining count.
+- [ ] Search for no results, remove the query and switch back to `Todos`; check that there are no duplicated entries or stale empty messages.
+
+These steps require a browser test; the documented hooks are not evidence that all transitions already pass.
+
 ## Active preview after changing a filter
 
 The selected flavor ID is stored independently of the category and search fields in `useFlavorStore`. The explorer currently changes category/query results without clearing that selection, so the large preview may continue displaying a flavor **not in the filtered grid**. This is a source-backed interaction gap requiring product review, not an observed browser-test result.
