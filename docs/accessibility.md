@@ -40,6 +40,17 @@ These are regression steps, not evidence of a completed keyboard or screen-reade
 - Check that headings follow a comprehensible hierarchy.
 - Check that empty search results and selection changes remain understandable.
 
+## Dynamic catalog announcements
+
+`FlavorExplorer.tsx` sets `aria-live="polite"` on the selected-flavor preview container, while its empty-search message is an animated `<p>` without an explicit status role. Category chips and flavor buttons report selection visually (flavor buttons also have `aria-pressed`). The markup does not, by itself, prove that a screen reader announces **the right amount** of updated content or the **zero-results message**.
+
+- [ ] With a screen reader, focus one flavor result and activate it twice; check whether the chosen flavor, category and availability are announced coherently without repeating an entire card unnecessarily.
+- [ ] Type a query with no matches and confirm that the empty state can be discovered without leaving the search field; record whether an automatic status announcement is missing.
+- [ ] Move between `Todos` and an individual category using keyboard navigation, then inspect the selected state and result count accessibility.
+- [ ] Clear the preview and confirm the `Cerrar vista del sabor` button is removed from the focus order and focus stays predictable.
+
+Log the actual browser/screen-reader pairing and findings; any ARIA adjustment should be followed by a separate accessibility review, not guessed from source inspection.
+
 ## Motion preferences
 
 `src/hooks/useReducedMotion.ts` wraps Framer Motion's reduced-motion preference, and `src/utils/a11y.ts` contains a media-query helper.
