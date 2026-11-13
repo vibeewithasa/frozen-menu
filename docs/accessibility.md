@@ -51,6 +51,14 @@ These are regression steps, not evidence of a completed keyboard or screen-reade
 
 Log the actual browser/screen-reader pairing and findings; any ARIA adjustment should be followed by a separate accessibility review, not guessed from source inspection.
 
+## Review stars and spoken ratings
+
+If real reviews are enabled, `Reviews.tsx` renders the **visible star count using `Math.round(r.rating)`** while the `aria-label` reports the **unrounded** numeric `r.rating` (for example, 4.4 displays four filled stars yet announces `4.4 de 5 estrellas`). The catalog's content guide already restricts ratings to finite values from 1 to 5, but **fractional values can still communicate different precision visually and audibly**. The reviews array is empty today, so this has not been exercised with live content.
+
+- [ ] In a local, temporary review fixture, compare a fractional rating, an integer rating and an omitted rating with a screen reader and visual inspection.
+- [ ] Confirm the announced count and the graphic represent the same rating convention approved by the business; if partial stars or a textual rating are needed, review the rendering in a separate UI change.
+- [ ] Remove all test reviews before committing or deploying; never invent customer testimonials to fill the empty section.
+
 ## Motion preferences
 
 `src/hooks/useReducedMotion.ts` wraps Framer Motion's reduced-motion preference, and `src/utils/a11y.ts` contains a media-query helper.
