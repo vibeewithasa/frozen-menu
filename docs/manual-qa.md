@@ -22,6 +22,16 @@ Use this checklist before releasing catalog or layout changes. Record the browse
 - [ ] Layouts remain readable at narrow mobile and desktop widths.
 - [ ] No unintended horizontal overflow occurs.
 
+## Resizing while mobile navigation is open
+
+`Nav.tsx` keeps the menu's `open` React state when a viewport changes width. At the `md` breakpoint, the toggle and mobile panel are hidden by responsive CSS rather than clearing that state. **An open mobile menu may therefore reappear** when a phone is rotated or a desktop window is resized below the breakpoint again. The current source also closes the panel on Escape or after choosing a link.
+
+- [ ] Open the menu on a narrow viewport, enlarge past `md`, then shrink below it again **without reloading**. Confirm whether the panel reappears unexpectedly and whether the user can close it.
+- [ ] Repeat after following a navigation anchor, after pressing Escape, and after rotating a physical phone. Verify the links remain usable and the page is not obscured.
+- [ ] In the accessibility tree, verify the toggle's `aria-expanded` agrees with the visible panel after each resize; do not infer this from the desktop navbar alone.
+
+These are manual reproduction steps for a source-backed state persistence risk, **not** a claim that a browser run has confirmed the behavior.
+
 ## Content and links
 
 - [ ] Visible contact links open the expected destinations.
