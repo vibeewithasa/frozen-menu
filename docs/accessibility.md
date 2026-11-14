@@ -65,6 +65,16 @@ If real reviews are enabled, `Reviews.tsx` renders the **visible star count usin
 
 Test with `prefers-reduced-motion: reduce` enabled in browser or operating-system settings. Verify that essential content remains available without depending on animation.
 
+## Decorative marquee and motion preferences
+
+`FlavorMarquee.tsx` continuously scrolls a duplicated list of flavor names with the Tailwind `animate-marquee` class, and marks its entire `<section>` as `aria-hidden="true"`. The global `src/styles/globals.css` media query changes animation duration and iteration counts when `prefers-reduced-motion: reduce` is active. These safeguards have **different purposes**: hiding decorative duplicates from assistive technology does not stop visual motion, and disabling motion does not make the marquee a usable catalog control.
+
+- [ ] With reduced motion disabled, check that the moving ribbon does not make the page unreadable or trap attention, particularly at 200% zoom.
+- [ ] Enable reduced motion in the OS/browser, reload and confirm that the continuous ribbon **actually stops moving**. Record browser and device; the CSS rule is not proof of a completed browser test.
+- [ ] With a screen reader, verify that the duplicate marquee items are absent from the reading order and that flavors remain discoverable through the **real interactive explorer**.
+
+A failed check calls for a reviewed visual or accessibility fix; do not remove `aria-hidden` merely to expose the decorative duplicates.
+
 ## Known mobile preview scroll gap
 
 In `src/sections/FlavorExplorer.tsx`, selecting a flavor below 1024 px schedules `scrollIntoView({ behavior: "smooth", block: "center" })` even when the reduced-motion hook returns `true`. This is an observed **source-code gap**, not a claim that browser behavior was tested.
