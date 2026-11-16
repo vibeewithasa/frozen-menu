@@ -53,6 +53,12 @@ If a flavor cannot be found, switch the category to `Todos`, clear the search fi
 
 If product requirements call for bookmarked searches or restored sessions, agree on URL/storage behavior and privacy implications first, then implement and test it as a separate feature.
 
+## A missing image or script returns HTML instead of the asset
+
+`netlify.toml` contains the fallback redirect `/* → /index.html` with HTTP status `200`. Depending on the hosting provider's shadowing and redirect behavior, a **missing static asset** might produce an HTML SPA response rather than the expected image, CSS or JavaScript. A network tab displaying **200** is therefore **not sufficient evidence** that a flavor photograph or script loaded correctly.
+
+When a deployed image breaks, inspect its exact request URL, `Content-Type`, response body preview and final URL. An asset expecting `image/jpeg` that receives `text/html` is **not** a valid image even if HTTP reports success. Compare against the file actually present in `public/images/` and the corresponding build artifact, then test the same request in a clean session and after a hard reload. Recheck the host's redirect precedence before changing `netlify.toml`; do not disable the SPA fallback blindly or fabricate a path. This is a diagnostic procedure, not proof that the redirect is currently misconfigured in production.
+
 ## The deployed page differs from local
 
 Run `npm run build` and `npm run preview`. Compare the deployed commit, hosting build logs, network requests and caching behavior. The Netlify configuration lives in `netlify.toml`.
