@@ -33,6 +33,15 @@ Review these source-backed behaviors manually:
 
 These are regression steps, not evidence of a completed keyboard or screen-reader audit.
 
+## Anchor destinations beneath the fixed header
+
+`Nav.tsx` uses a `fixed inset-x-0 top-0` header for both desktop links and the mobile menu; section links target hashes such as `#sabores` and `#destacados`. The document also has a skip link to `#main`. A successful hash change **does not guarantee** that the destination heading remains visible beneath the fixed header, particularly when text wraps at 200–400% browser zoom. The header height changes with viewport and navigation content, so a static screenshot at 100% is insufficient evidence.
+
+- [ ] At 100%, 200% and 400% zoom, follow each available navigation anchor; verify the targeted section heading is not hidden behind the header and remains readable.
+- [ ] Tab to `Saltar al contenido`, activate it and confirm that keyboard focus and the first useful content are discoverable without visually searching for the destination.
+- [ ] Open the mobile menu, choose a section, and repeat after orientation or viewport-width changes. Ensure the menu closes and the fragment destination remains visible.
+- [ ] Record browser, zoom, viewport, target URL fragment and observed focus. If needed, fix anchor offset or focus management in a separately reviewed UI change; these cases have **not** been executed by this documentation update.
+
 ## Screen reader basics
 
 - Check meaningful names for the search input and flavor controls.
