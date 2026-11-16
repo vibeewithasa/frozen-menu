@@ -49,6 +49,17 @@ This is a manual source-backed regression plan, not evidence that a fixture was 
 - [ ] Sections without verified business data stay hidden.
 - [ ] Page title and metadata reflect the current brand.
 
+## WhatsApp order handoff on phones and desktop
+
+`Nav.tsx` generates the optional `Pedir por WhatsApp` link with `whatsappUrl(ORDER_MESSAGE)`. The helper in `src/config/site.ts` builds `https://wa.me/<digits>?text=<encoded message>` using the configured phone digits and the current brand. It **does not** submit an order from this site; it only opens an external WhatsApp destination. The link is omitted when `site.whatsapp` is `null`.
+
+- [ ] With the owner-approved phone number configured, inspect the link URL and verify its **international digit-only number** and decoded message before opening it. Do not include private customer details in a prefilled message.
+- [ ] Open the link on an actual mobile phone with WhatsApp installed, another device without WhatsApp, and a desktop browser. Check whether the offered handoff is understandable; do not claim every device is supported merely because the URL is valid.
+- [ ] Do **not send a test message** to a business/customer account without explicit permission. Confirm the destination with the business owner; an apparently working `wa.me` URL might still address the wrong person.
+- [ ] In a local-only fixture, set `site.whatsapp: null` and confirm both desktop and mobile order CTAs disappear, then restore the approved value before committing.
+
+These steps document an external handoff, not a payment, checkout or live reservation integration.
+
 ## Search updates and pagination after rapid typing
 
 `FlavorExplorer.tsx` keeps the input's immediate `query` state, filters on `useDeferredValue(query)`, and resets visible results to **24** in an effect when the deferred query or selected category changes. This is intended to keep typing responsive, but a normal single-keypress check does not exercise intermediate results, a previously expanded list or quick filter changes.
