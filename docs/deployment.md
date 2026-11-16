@@ -24,6 +24,16 @@ Before changing the logo, test a returning browser with a **warm cache** as well
 
 `index.html` currently declares an Open Graph image using the root-relative path `/images/logo-helados.png` and repeats that path in structured data and Twitter metadata. Some social crawlers expect an **absolute public HTTPS URL** for share images; a local build passing does not prove that an external preview service can resolve a relative URL. After connecting the final domain, verify the deployed document and test its share preview with the relevant crawler/debugger, including image dimensions and public access. Do not invent a production domain or silently change social metadata without confirming the actual deployment URL.
 
+## Fonts and third-party connectivity
+
+`index.html` fetches **Fraunces and Inter** through `fonts.googleapis.com` and `fonts.gstatic.com`; they are not guaranteed to be cached or accessible on a visitor's network. A successful Vite build does not include those remote responses, and a cached developer browser can mask a blocked font request.
+
+- In a clean browser profile, block both Google Fonts hosts and reload. Check that the catalog, headings, navigation and buttons remain legible in their fallback fonts with no unexpected layout overflow.
+- Repeat on a slow mobile connection and with browser zoom. Inspect font request failures and layout movement rather than treating every network warning as a JavaScript failure.
+- If offline font availability or avoiding third-party requests becomes a requirement, review license and self-hosted asset packaging **as a separate implementation change**. Do not assume the current source bundles the fonts or change their CDN configuration without testing.
+
+These are publication checks, **not** measurements already made in a browser.
+
 ## Before publishing
 
 ```bash
