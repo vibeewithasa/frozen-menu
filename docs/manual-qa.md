@@ -32,6 +32,17 @@ Use this checklist before releasing catalog or layout changes. Record the browse
 
 These are manual reproduction steps for a source-backed state persistence risk, **not** a claim that a browser run has confirmed the behavior.
 
+## Conditional sections and navigation links
+
+`getNavItems()` in `src/lib/sections.ts` derives the top navigation from content flags: `Sabores` requires catalog entries, `Destacados` requires at least one featured flavor, `Nosotros` requires `site.about`, `Galería` requires images, `Opiniones` requires reviews, and `Visítanos` requires an address, map URL **or** hours (`hasVisitInfo()`). These are independent conditions; hiding an empty section should also hide its anchor from the navigation, and enabling it must produce a real matching section ID.
+
+- [ ] On the current empty optional-content configuration, confirm no `#nosotros`, `#galeria`, `#opiniones` or `#visitanos` navigation entries lead to blank sections.
+- [ ] In a local disposable content fixture, enable **one** optional section at a time with authorized sample content; confirm its new nav link points to an existing section and is usable on desktop and mobile.
+- [ ] Clear the fixture, verify the section and link both disappear, and ensure no **placeholder** address, hour, testimonial or photo gets committed or published.
+- [ ] Set a featured flavor temporarily, verify `#destacados` and the `Destacados` section appear together, then restore the original catalog.
+
+This is a manual source-backed regression plan, not evidence that a fixture was created or tested during documentation maintenance.
+
 ## Content and links
 
 - [ ] Visible contact links open the expected destinations.
