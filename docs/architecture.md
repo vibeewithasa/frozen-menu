@@ -19,6 +19,10 @@ Before a brand or domain change, review both files together. Check `index.html` 
 
 `src/sections/FlavorExplorer.tsx` renders the flavor grid, filtering controls and preview. `src/hooks/useFlavorStore.ts` holds the selected flavor, active category and search query using Zustand. Changes to catalog data flow into the UI through imports and derived helper functions.
 
+**State boundaries matter when debugging:** the Zustand store is in-memory only; it does not use `persist`, browser storage or query-string synchronization. The selected flavor ID is **independent** of the category and query, so filtering does not automatically clear the large preview. The component applies `useDeferredValue(query)` to keep typing responsive, derives results via normalized name/category matching and owns the visible page size locally (`24` initially, `24` more per click). It resets that page size when category or deferred query changes; the component also owns image-failure flags keyed by flavor ID. These are interface states, **not** persisted catalog data or server-side pagination. A full browser reload discards them; the actual source catalog remains `src/data/flavors.ts`.
+
+For any future deep-link, bookmarking or persisted-filter feature, decide the URL/session semantics and test fast typing, `Cargar más`, active preview and image failures together. See `docs/manual-qa.md` for reproduction scenarios.
+
 ## Presentation utilities
 
 - `src/lib/flavorTheme.ts` maps typed theme names to CSS custom properties.
