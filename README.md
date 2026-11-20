@@ -8,7 +8,7 @@ A responsive, interactive digital menu developed for **Helados Gourmet Leal**. V
 - Product images shown on demand
 - Responsive grid for mobile and desktop
 - Flavor selection through ordinary buttons, with keyboard support
-- Social and WhatsApp contact links based on verified business settings
+- Social and WhatsApp contact links from configured business settings (confirm the destination with the owner before publishing)
 - Light, cream-toned visual styling and flavor-responsive accent colors
 
 ## Tech stack
@@ -58,6 +58,10 @@ npm run typecheck
 ## License and assets
 
 The project contains an existing [MIT license](LICENSE) for the repository's software. Product photographs, names, logos, and other brand materials may be subject to separate ownership or usage rights; verify them before reuse.
+
+## Scope and limitations
+
+This is a **static public catalog**, not a checkout, payment processor, stock ledger or live order-management system. The `Pedir por WhatsApp` link (when configured) only opens an external WhatsApp conversation with a prefilled message; it does **not** place, send, verify or confirm an order. Availability and featured badges are values maintained in `src/data/flavors.ts`, not real-time inventory. Before publishing a new menu, confirm the business phone, content and current product availability with the owner, and run the checks in [Updating menu content](docs/content-guide.md) and [Manual QA](docs/manual-qa.md).
 
 ## Status
 
