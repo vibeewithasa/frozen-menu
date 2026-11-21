@@ -34,6 +34,12 @@ Before changing the logo, test a returning browser with a **warm cache** as well
 
 These are publication checks, **not** measurements already made in a browser.
 
+## Hosting at the domain root versus a subdirectory
+
+The current `vite.config.ts` does **not** configure a non-root `base`, and both `index.html` and the React components reference root-absolute paths such as `/src/main.tsx` (rewritten by Vite for the build) and `/images/logo-helados.png`. Therefore the documented Netlify setup assumes the site is served at the **origin root** (`https://example.com/`), not automatically at `/catalogo/` or another nested directory. Copying `dist/` below a URL prefix without reviewing these paths can break the bundle, catalog images and social previews even when `npm run build` succeeds.
+
+If the deployment needs a subpath, first decide the canonical public URL and review Vite's `base`, every root-absolute image/icon path, metadata URLs and hosting rewrite rules **together**. Validate the built assets and page via that exact subpath in a test deployment, including direct reloads and a clean-cache browser. Do not blindly change the Netlify redirect or replace paths with an invented production domain. This is a deployment limitation documented from source, **not** an already implemented subpath mode.
+
 ## Before publishing
 
 ```bash
