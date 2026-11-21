@@ -30,6 +30,12 @@ The current `FlavorMarquee.tsx` renders the full `flavors` array, including entr
 
 This matters when publishing availability changes: review explorer results, marquee, featured cards and hero count together. Do not interpret the homepage count as the number currently in stock; hiding unavailable products in these secondary surfaces would require a separate, tested code change.
 
+## How shoppers can find a new flavor
+
+The current explorer search matches **only the flavor's visible `name`**, after converting to lowercase and removing diacritics. It does **not** index `description`, `season`, flavor `id`, category label or informal synonyms. The selected category and entered query are combined, so a matching name in a different category will still be excluded until the visitor returns to `Todos`. A descriptive paragraph such as “sin azúcar” or a seasonal note does not make those words searchable.
+
+When naming or renaming a flavor, confirm the **owner-approved product name**, keep stable IDs for existing items and verify searches with the intended spelling and without accents. Do not add misleading keywords to customer-facing names to game search. If the business needs descriptions, dietary tags or synonyms to be searchable, that requires a deliberate, tested search feature; it cannot be achieved by filling fields that the existing filter ignores. See [Troubleshooting](troubleshooting.md#search-finds-fewer-flavors-than-expected) for diagnosis.
+
 ## Edit categories
 
 Categories are defined in the `categories` array with stable IDs, display names, ordering and an `available` flag. If you rename an ID, update references in flavors and the relevant asset folder.
