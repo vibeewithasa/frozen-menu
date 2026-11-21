@@ -22,6 +22,16 @@ Use this checklist before releasing catalog or layout changes. Record the browse
 - [ ] Layouts remain readable at narrow mobile and desktop widths.
 - [ ] No unintended horizontal overflow occurs.
 
+## Tablet-width flavor selection and navigation boundaries
+
+Two existing responsive decisions have **different thresholds**: `Nav.tsx` switches to desktop navigation at Tailwind `md` (768 CSS pixels by default), while `FlavorExplorer.tsx` calls `previewRef.scrollIntoView({ behavior: "smooth", block: "center" })` whenever `window.innerWidth < 1024`. This means a tablet-width viewport from **768 through 1023 CSS px** can show desktop navigation but still automatically scroll to the flavor preview after selection. Both behaviors are source-backed; whether the combination is desirable needs a real browser review.
+
+- [ ] Test flavor selection at **767, 768, 1023 and 1024 CSS px**, recording whether the navigation changes and whether the preview scroll is triggered.
+- [ ] Verify that the fixed header does not cover the preview or cause the visitor to lose context after automatic scrolling at the in-between tablet widths.
+- [ ] Repeat with reduced motion enabled, noting the existing smooth-scroll gap documented in [Accessibility](accessibility.md#known-mobile-preview-scroll-gap).
+
+Do not infer these results from viewport presets alone; run them in the browser before modifying breakpoints.
+
 ## Resizing while mobile navigation is open
 
 `Nav.tsx` keeps the menu's `open` React state when a viewport changes width. At the `md` breakpoint, the toggle and mobile panel are hidden by responsive CSS rather than clearing that state. **An open mobile menu may therefore reappear** when a phone is rotated or a desktop window is resized below the breakpoint again. The current source also closes the panel on Escape or after choosing a link.
